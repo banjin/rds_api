@@ -25,7 +25,7 @@ def get_file_name(file_full_name):
 
 class HelloWorldService(DefinitionBase):
     @rpc(String, _returns=String)
-    def QueryCondition(self, name):
+    def get_file_status(self, name):
         '''''
 Docstrings for service methods appear as documentation in the wsdl
 <b>what fun</b>
