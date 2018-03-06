@@ -39,18 +39,15 @@ hello world
 >>> result = hello_client.service.get_file_status(
 """<?xml version="1.0" encoding="UTF-8" ?>
 <root>
-		<fankui>
-				<babh>120202000000000021</babh>
-				<sqm>320202000000000023</sqm>
-				<softip>192.168.19.101</softip>
-				<softmac>OA-9D-3B-4C-5D-7A</softmac>
-				<azdm>010031</azdm>
-				<filelist wjs="3">
-					<wjm>11001901120180305000008.xml</wjm>
-					<wjm>11001901120180305000010.xml</wjm>
-					<wjm>09000109120171123000004.xml</wjm>
-				</filelist>
-		</fankui>
+		<QueryCondition>
+			<wjm>11001901120180305000008.xml</wjm>
+		</QueryCondition>
+		<QueryCondition>
+			<wjm>11001901120180305000010.xml</wjm>
+		</QueryCondition>
+		<QueryCondition>
+			<wjm>09000109120171123000004.xml</wjm>
+		</QueryCondition>
 </root>""")
 >>> print result
 '''
@@ -60,6 +57,10 @@ hello world
         # return results
         file_list = re.findall('<wjm>(.*?)</wjm>', name)
         file_num = len(file_list)
+        if not file_num:
+            return """<?xml version="1.0" encoding="UTF-8" ?>
+                                    <root><head>1<code></code><msg>数据查询成功</msg></head>
+                                                    <body><result><ywcode>0</ywcode><ywmsg>无数据</ywmsg></result></body></root>"""
         file_name_list = map(get_file_name, file_list)
         pre_file_list = os.listdir('/data/xml/pre')
         updated_file_list = os.listdir('/data/xml/uploaded')
@@ -83,26 +84,16 @@ hello world
                     return_file_list.append({"file_status": 5, "file_name": file_name})
 
         return_code = """<?xml version="1.0" encoding="UTF-8" ?>
-                                    <root>
-                                            <fankui>
-                                                    <babh>120202000000000021</babh>
-                                                    <sqm>320202000000000023</sqm>
-                                                    <softip>192.168.19.101</softip>
-                                                    <softmac>OA-9D-3B-4C-5D-7A</softmac>
-                                                    <azdm>010031</azdm>
-                                                    <filelist wjs="{file_num}">
-                                                        {file_content}</filelist></fankui></root>"""
+                                    <root><head>1<code></code><msg>数据查询成功</msg></head>
+                                                    <body>{file_content}</body></root>"""
 
         a = ''
-        for k, file_data in enumerate(return_file_list):
-            a += """<file_info_{k}>
-                                <wjm>{file_name}</wjm>
-                                <wjzt>{file_status}</wjzt></file_info_{k}>""".format(k=k + 1,
+        for file_data in return_file_list:
+            a += """<result><ywcode>1</ywcode><ywmsg>查询成功</ywmsg><dataObj><wjm>{file_name}</wjm><wjzt>{file_status}</wjzt></dataObj></result>""".format(
                                                                                      file_name=file_data['file_name'],
                                                                                      file_status=file_data[
                                                                                          'file_status'])
-
-        data = return_code.format(file_num=file_num, file_content=a)
+        data = return_code.format(file_content=a)
 
         return data
 
