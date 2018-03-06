@@ -38,7 +38,7 @@ class FileStatus(APIView):
         # 查找所有/data/xml/pre和/data/xml/updated/文件
 
         pre_file_list = os.listdir('/data/xml/pre')
-        updated_file_list = os.listdir('/data/xml/updated')
+        updated_file_list = os.listdir('/data/xml/uploaded')
         back_file_list = os.listdir('/data/xml/back')
 
         pre_file_name_ist = map(get_file_name,pre_file_list)
@@ -78,7 +78,7 @@ def face_back(request):
         file_num = len(file_list)
         file_name_list = map(get_file_name, file_list)
         pre_file_list = os.listdir('/data/xml/pre')
-        updated_file_list = os.listdir('/data/xml/updated')
+        updated_file_list = os.listdir('/data/xml/uploaded')
         back_file_list = os.listdir('/data/xml/back')
 
         # 采集文件
