@@ -59,7 +59,7 @@ hello world
         file_num = len(file_list)
         if not file_num:
             return """<?xml version="1.0" encoding="UTF-8" ?>
-                                    <root><head>1<code></code><msg>数据查询成功</msg></head>
+                                    <root><head>1<code></code><msg>u"数据查询成功"</msg></head>
                                                     <body><result><ywcode>0</ywcode><ywmsg>无数据</ywmsg></result></body></root>"""
         file_name_list = map(get_file_name, file_list)
         pre_file_list = os.listdir('/data/xml/pre')
@@ -84,12 +84,12 @@ hello world
                     return_file_list.append({"file_status": 5, "file_name": file_name})
 
         return_code = """<?xml version="1.0" encoding="UTF-8" ?>
-                                    <root><head>1<code></code><msg>数据查询成功</msg></head>
+                                    <root><head>1<code></code><msg>u"数据查询成功"</msg></head>
                                                     <body>{file_content}</body></root>"""
 
         a = ''
         for file_data in return_file_list:
-            a += """<result><ywcode>1</ywcode><ywmsg>查询成功</ywmsg><dataObj><wjm>{file_name}</wjm><wjzt>{file_status}</wjzt></dataObj></result>""".format(
+            a += """<result><ywcode>1</ywcode><ywmsg>u"查询成功"</ywmsg><dataObj><wjm>{file_name}</wjm><wjzt>{file_status}</wjzt></dataObj></result>""".format(
                                                                                      file_name=file_data['file_name'],
                                                                                      file_status=file_data[
                                                                                          'file_status'])
