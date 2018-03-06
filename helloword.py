@@ -47,7 +47,7 @@ hello world
         file_num = len(file_list)
         file_name_list = map(get_file_name, file_list)
         pre_file_list = os.listdir('/data/xml/pre')
-        updated_file_list = os.listdir('/data/xml/updated')
+        updated_file_list = os.listdir('/data/xml/uploaded')
         back_file_list = os.listdir('/data/xml/back')
 
         # 采集文件
