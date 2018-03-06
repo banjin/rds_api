@@ -2,3 +2,5 @@ api_venv/*
 *.pyc
 *.pyo
 .idea/*
+ttt/*
+*.sqlite3
