@@ -25,7 +25,7 @@ def get_file_name(file_full_name):
 
 class HelloWorldService(DefinitionBase):
     @rpc(String, _returns=String)
-    def get_file_status(self, name):
+    def QueryCondition(self, name):
         '''''
 Docstrings for service methods appear as documentation in the wsdl
 <b>what fun</b>
@@ -35,8 +35,23 @@ Docstrings for service methods appear as documentation in the wsdl
 hello world
 
 >>> from suds.client import Client
->>> hello_client = Client('http://localhost:7789/?wsdl')
->>> result = hello_client.service.get_file_status("Dave")
+>>> hello_client = Client('http://40.125.204.79:7789/content-root/services/SafeOutAccess?wsdl')
+>>> result = hello_client.service.get_file_status(
+"""<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+		<fankui>
+				<babh>120202000000000021</babh>
+				<sqm>320202000000000023</sqm>
+				<softip>192.168.19.101</softip>
+				<softmac>OA-9D-3B-4C-5D-7A</softmac>
+				<azdm>010031</azdm>
+				<filelist wjs="3">
+					<wjm>11001901120180305000008.xml</wjm>
+					<wjm>11001901120180305000010.xml</wjm>
+					<wjm>09000109120171123000004.xml</wjm>
+				</filelist>
+		</fankui>
+</root>""")
 >>> print result
 '''
         # results = []
