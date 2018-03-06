@@ -118,6 +118,7 @@ def face_back(request):
                                                                              file_status=file_data['file_status'])
 
         data = return_code.format(file_num=file_num, file_content=a)
+        return_data = {}
         return HttpResponse(data)
     else:
         return rsp({"status": 1, 'error': u'请使用post方法'})
