@@ -10,6 +10,7 @@ from soaplib.serializers.clazz import Array
 import os
 import re
 import sys
+import datetime
 
 
 ''''' 
@@ -96,6 +97,48 @@ hello world
         data = return_code.format(file_content=a)
 
         return data
+
+    @rpc(String, _returns=String)
+    def get_tactrcs_config(self, global_config):
+        return """<?xml version="1.0" encoding="UTF-8"?>
+        <root><head><code></code><msg>u"数据查询成功"</msg</head><body><result>
+        <ywcode>1</ywcode><ywmsg>u"数据查询成功"</ywmsg>
+        <dataObj><giz>AZDM</giz><csmc>u"安管系统安装代码"</csmc><mrz>110001</mrz></dataObj>
+        <dataObj><giz>CLSJKZDZ</giz><csmc>u"存量数据单个数据块最大数据量"</csmc><mrz>10000</mrz></dataObj>
+        <dataObj><giz>CLSJKLJZDZ</giz><csmc>u"存量数据采集任务最大数据库连接数"</csmc><mrz>20</mrz></dataObj>
+        <dataObj><giz>CLRWQDSJ</giz><csmc>u"存量数据采集任务启动时间"</csmc><mrz>19</mrz></dataObj>
+        <dataObj><giz>CLRWJSSJ</giz><csmc>u"存量数据采集任务结束时间"</csmc><mrz>7</mrz></dataObj>
+        <dataObj><giz>ZLCJZQ</giz><csmc>u"增量数据采集周期"</csmc><mrz>1</mrz></dataObj>
+        <dataObj><giz>RZJXWJZDZ</giz><csmc>u"日志解析文件最大值"</csmc><mrz>10</mrz></dataObj>
+        <dataObj><giz>CLSCML</giz><csmc>u"存量数据文件上传目录"</csmc><mrz>/</mrz></dataObj>
+        <dataObj><giz>ZLSCM</giz><csmc>u"增量数据文件上传目录"</csmc><mrz>/</mrz></dataObj>
+        <dataObj><giz>JGXTLB</giz><csmc>u"交管信息系统类别"</csmc><mrz>u"01#类别1名称,02#类别2名称"</mrz></dataObj>
+        </result></body></root>"""
+
+    @rpc(String, _returns=String)
+    def get_single_config(self, single_config):
+        now = datetime.datetime.now()
+        create_time = now.strftime("%Y-%m-%d %H:%M:%S")
+        update_time = now.strftime("%Y-%m-%d %H:%M:%S")
+
+        return """<?xml version="1.0" encoding="UTF-8"?>
+            <root><head><code></code><msg>u"数据查询成功"</msg</head><body><result>
+            <ywcode>1</ywcode><ywmsg>u"数据查询成功"</ywmsg>
+            <dataObj><giz>JGXTLB</giz><csmc>u"系统类别代码"</csmc><mrz>01</mrz></dataObj>
+            <dataObj><giz>BM</giz><csmc>u"表名"</csmc><mrz>usera.table01</mrz></dataObj>
+            <dataObj><giz>BMMS</giz><csmc>u"表名描述"</csmc><mrz>u"简单的测试数据文件"</mrz></dataObj>
+            <dataObj><giz>CLCJBJ</giz><csmc>u"存量数据采集标记"</csmc><mrz>1</mrz></dataObj>
+            <dataObj><giz>SJCZD</giz><csmc>u"时间戳字段"</csmc><mrz>starttime</mrz></dataObj>
+            <dataObj><giz>CLQSRQ</giz><csmc>u"存量数据起始日期"</csmc><mrz>2017-01-01</mrz></dataObj>
+            <dataObj><giz>CLGLTJ</giz><csmc>u"存量数据过滤条件"</csmc><mrz>id&gt1000;id&lt10000</mrz></dataObj>
+            <dataObj><giz>CLWCBJ</giz><csmc>u"存量数据采集完成标记"</csmc><mrz>0</mrz></dataObj>
+            <dataObj><giz>ZLKHDGLLX</giz><csmc>u"增量数据客户端过滤类型"</csmc><mrz>!sqlplus,PL/SQL Developer</mrz></dataObj>
+            <dataObj><giz>ZLINSERT</giz><csmc>u"是否采集'insert'增量数据"</csmc><mrz>1</mrz></dataObj>
+            <dataObj><giz>ZLUPDATE</giz><csmc>u"是否采集'update'增量数据"</csmc><mrz>1</mrz></dataObj>
+            <dataObj><giz>ZLDELETE</giz><csmc>u"是否采集'delete'增量数据"</csmc><mrz>1</mrz></dataObj>
+            <dataObj><giz>CJSJ</giz><csmc>u"策略创建时间"</csmc><mrz>{create_time}</mrz></dataObj>
+            <dataObj><giz>GXSJ</giz><csmc>u"策略更新时间"</csmc><mrz>{update_time}</mrz></dataObj>
+            </result></body></root>""".format(create_time=create_time, update_time=update_time)
 
 
 if __name__ == '__main__':
