@@ -85,7 +85,7 @@ hello world
                     return_file_list.append({"file_status": 5, "file_name": file_name})
 
         return_code = """<?xml version="1.0" encoding="UTF-8" ?>
-                                    <root><head>1<code></code><msg>u"数据查询成功"</msg></head>
+                                    <root><head><code>1</code><msg>u"数据查询成功"</msg></head>
                                                     <body>{file_content}</body></root>"""
 
         a = ''
