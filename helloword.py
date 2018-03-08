@@ -41,13 +41,13 @@ hello world
 """<?xml version="1.0" encoding="UTF-8" ?>
 <root>
 		<QueryCondition>
-			<wjm>11001901120180305000008.xml</wjm>
+			<wjm>11001901120180305000008</wjm>
 		</QueryCondition>
 		<QueryCondition>
-			<wjm>11001901120180305000010.xml</wjm>
+			<wjm>11001901120180305000010</wjm>
 		</QueryCondition>
 		<QueryCondition>
-			<wjm>09000109120171123000004.xml</wjm>
+			<wjm>09000109120171123000004</wjm>
 		</QueryCondition>
 </root>""")
 >>> print result
@@ -60,7 +60,7 @@ hello world
         file_num = len(file_list)
         if not file_num:
             return """<?xml version="1.0" encoding="UTF-8" ?>
-                                    <root><head>1<code></code><msg>u"数据查询成功"</msg></head>
+                                    <root><head><code>1</code><msg>u"数据查询成功"</msg></head>
                                                     <body><result><ywcode>0</ywcode><ywmsg>无数据</ywmsg></result></body></root>"""
         file_name_list = map(get_file_name, file_list)
         pre_file_list = os.listdir('/data/xml/pre')
