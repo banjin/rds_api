@@ -4,3 +4,4 @@ api_venv/*
 .idea/*
 ttt/*
 *.sqlite3
+debug.log

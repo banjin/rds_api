@@ -17,6 +17,8 @@ import datetime
 This is a simple HelloWorld example to show the basics of writing 
 a webservice using soaplib, starting a server, and creating a service 
 client. 
+参考:https://www.jianshu.com/p/ad3c27d2a946
+http://blog.sina.com.cn/s/blog_978a39e401016fzg.html
 '''
 
 

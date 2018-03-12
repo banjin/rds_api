@@ -10,6 +10,9 @@ from rest_framework.response import Response
 from .models import FeedBackTestData
 from .serializers import CommentSerializer
 from django.http import JsonResponse as rsp, HttpResponse
+import logging
+
+logger = logging.getLogger('api')
 
 
 def get_file_name(file_full_name):
@@ -122,3 +125,19 @@ def face_back(request):
         return HttpResponse(data)
     else:
         return rsp({"status": 1, 'error': u'请使用post方法'})
+
+
+class SayHi(APIView):
+    """
+    测试使用日志
+    """
+    def get(self, request, format=None):
+        """
+        获取hello
+        :param request:
+        :param format:
+        :return:
+        """
+        logger.info("hi,mm")
+        return Response({"status":0, "message": "hello, my love"})
+
