@@ -470,6 +470,6 @@ if __name__ == '__main__':
 
     print "listening to http://0.0.0.0:7792"
     print "wsdl is at: http://127.0.0.1:7792/?wsdl"
-    server = make_server('localhost', 7792, wsgi_application)
+    server = make_server('0.0.0.0', 7792, wsgi_application)
     server.serve_forever()
 
