@@ -165,7 +165,7 @@ hello world
                         </result></body></root>""".format(create_time=create_time, update_time=update_time)
         # 根据文件名查询存量数据日志解析文件最新的处理状态
         elif jkid == '81Q03':
-
+            logger.info(u"获取存量文件状态")
             file_list = re.findall('<wjm>(.*?)</wjm>', UTF8XmlDocname)
             file_num = len(file_list)
             if not file_num:
@@ -191,8 +191,10 @@ hello world
                 if file_name not in back_file_name_list:
                     if file_name in update_file_name_list:
                         return_file_list.append({"file_status": 4, "file_name": file_name})
+                        logger.info("{file_name} 已入库".format(file_name=file_name))
                     else:
                         return_file_list.append({"file_status": 5, "file_name": file_name})
+                        logger.info("{file_name} 要求重传".format(file_name=file_name))
 
             return_code = """<?xml version="1.0" encoding="UTF-8" ?>
                                         <root><head><code>1</code><msg>u"数据查询成功"</msg></head>
@@ -208,9 +210,53 @@ hello world
 
             return data
         elif jkid == '81Q04':
-            pass
+            logger.info(u"获取增量文件状态")
+            file_list = re.findall('<wjm>(.*?)</wjm>', UTF8XmlDocname)
+            file_num = len(file_list)
+            if not file_num:
+                return """<?xml version="1.0" encoding="UTF-8" ?>
+                                                    <root><head><code>1</code><msg>u"数据查询成功"</msg></head>
+                                                                    <body><result><ywcode>0</ywcode><ywmsg>无数据</ywmsg></result></body></root>"""
+            file_name_list = map(get_file_name, file_list)
+            pre_file_list = os.listdir('/data/xml/pre')
+            updated_file_list = os.listdir('/data/xml/uploaded')
+            back_file_list = os.listdir('/data/xml/back')
+
+            # 采集文件
+            pre_file_name_ist = map(get_file_name, pre_file_list)
+            # 上传文件
+            update_file_name_list = map(get_file_name, updated_file_list)
+            # 本分文件
+            back_file_name_list = map(get_file_name, back_file_list)
+
+            return_file_list = []
+
+            # 根据文件名去文件夹下查找文件
+            for file_name in file_name_list:
+                if file_name not in back_file_name_list:
+                    if file_name in update_file_name_list:
+                        return_file_list.append({"file_status": 4, "file_name": file_name})
+                        logger.info("{file_name} 已入库".format(file_name=file_name))
+                    else:
+                        return_file_list.append({"file_status": 5, "file_name": file_name})
+                        logger.info("{file_name} 要求重传".format(file_name=file_name))
+
+            return_code = """<?xml version="1.0" encoding="UTF-8" ?>
+                                                    <root><head><code>1</code><msg>u"数据查询成功"</msg></head>
+                                                                    <body>{file_content}</body></root>"""
+
+            a = ''
+            for file_data in return_file_list:
+                a += """<result><ywcode>1</ywcode><ywmsg>u"查询成功"</ywmsg><dataObj><wjm>{file_name}</wjm><wjzt>{file_status}</wjzt></dataObj></result>""".format(
+                    file_name=file_data['file_name'],
+                    file_status=file_data[
+                        'file_status'])
+            data = return_code.format(file_content=a)
+
+            return data
         # 心跳状态上报
         elif jkid == '81W01':
+            logger.info(u"心跳状态上报")
             UTF8XmlDocname = """<?xml version="1.0" encoding="UTF-8"?>
             <root><WriteData>
             <babh>xxxxxxx</babh><sbrq>vfvfvfvf</sbrq>
@@ -223,6 +269,7 @@ hello world
                    """
         # 采集软件运行状态写入
         elif jkid == '81W02':
+            logger.info(u"采集软件运行状态写入")
             UTF8XmlDocname = """<?xml version="1.0" encoding="UTF-8"?>
             <root><WriteData>
             <babh>xxxxxxx</babh>
@@ -247,6 +294,7 @@ hello world
                                """
         # 存量数据处理状态写入
         elif jkid == '81W03':
+            logger.info(u"存量数据处理状态写入")
             UTF8XmlDocname = """<?xml version="1.0" encoding="UTF-8"?>
             <root><WriteData>
             
@@ -270,6 +318,7 @@ hello world
                                """
         # 存量数据断点写入
         elif jkid == '81W04':
+            logger.info(u"存量数据断点写入")
             UTF8XmlDocname = """<?xml version="1.0" encoding="UTF-8"?>
                         <root><WriteData>
                         <bm>xx</bm>
@@ -287,6 +336,7 @@ hello world
                                """
         # 存量数据文件信息写入
         elif jkid == '81W05':
+            logger.info(u"存量数据文件信息写入")
             UTF8XmlDocname = """<?xml version="1.0" encoding="UTF-8"?>
                                                 <root><WriteData>
                                                 <jgxtlb>80</jgxtlb>
@@ -315,6 +365,7 @@ hello world
                                 """
         # 增量数据断点写入
         elif jkid == '81W06':
+            logger.info(u"增量数据断点写入")
             UTF8XmlDocname = """<?xml version="1.0" encoding="UTF-8"?>
                                     <root><WriteData>
                                     <jgxtlb>21</jgxtlb>
@@ -328,6 +379,7 @@ hello world
                                """
         # 增量数据文件信息写入
         elif jkid == '81W07':
+            logger.info(u"增量数据文件信息写入")
             UTF8XmlDocname = """<?xml version="1.0" encoding="UTF-8"?>
                                                 <root><WriteData>
                                                 <jgxtlb>21</jgxtlb>
@@ -352,12 +404,12 @@ hello world
                                                 </WriteData></root>
             """
 
-
             return """<?xml version="1.0" encoding="UTF-8"?>
                                    <root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>
                                """
         # DDL数据审计信息写入
         elif jkid == '81W08':
+            logger.info(u"DDL数据审计信息写入")
             UTF8XmlDocname = """<?xml version="1.0" encoding="UTF-8"?>
                                 <root><WriteData>
                                 <jgxtlb>21</jgxtlb>
@@ -378,6 +430,7 @@ hello world
                                """
         # 数据采集情况统计信息写入
         elif jkid == '81W09':
+            logger.info(u"数据采集情况统计信息写入")
             UTF8XmlDocname = """<?xml version="1.0" encoding="UTF-8"?>
             
                                             <root><WriteData>
