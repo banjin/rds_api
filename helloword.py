@@ -52,7 +52,7 @@ def get_file_name(file_full_name):
 
 class HelloWorldService(DefinitionBase):
     @soap(String, String, String, String, String, String, _returns=String)
-    def get_file_status(self, xtlb='', jkxlb='',jkid='', babh='', wkmac='',UTF8XmlDocname=''):
+    def queryRdsOut(self, xtlb='', jkxlb='',jkid='', babh='', wkmac='',UTF8XmlDocname=''):
         '''''
 Docstrings for service methods appear as documentation in the wsdl
 <b>what fun</b>
@@ -254,8 +254,14 @@ hello world
             data = return_code.format(file_content=a)
 
             return data
+        else:
+            return "error"
+
+    @soap(String, String, String, String, String, String, _returns=String)
+    def writeRdsOut(self, xtlb='', jkxlb='', jkid='', babh='', wkmac='', UTF8XmlDocname=''):
+
         # 心跳状态上报
-        elif jkid == '81W01':
+        if jkid == '81W01':
             logger.info(u"心跳状态上报")
             UTF8XmlDocname = """<?xml version="1.0" encoding="UTF-8"?>
             <root><WriteData>
