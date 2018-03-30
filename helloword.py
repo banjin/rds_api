@@ -118,9 +118,9 @@ hello world
     def get_tactrcs_config(self, xtlb, jkid, UTF8XmlDoc):
         """
         全局参数查询
-        :param xtlb:
-        :param jkid:
-        :param UTF8XmlDoc:
+        :param xtlb
+        :param jkid
+        :param UTF8XmlDoc
         :return:
         """
         xtlb = xtlb
@@ -265,7 +265,6 @@ hello world
             
             </result></body></root>""".format(create_time=create_time, update_time=update_time)
 
-
     @rpc(String, String, String, _returns=String)
     def post_jump(self, xtlb, jkid, UTF8XmlDoc):
         """
@@ -276,8 +275,7 @@ hello world
         :param UTF8XmlDoc:
         :return:
         """
-        return """
-        <?xml version="1.0" encoding="UTF-8"?>
+        return """<?xml version="1.0" encoding="UTF-8"?>
             <root><head><code>1</code><msg>null</msg</head><body><result>
             <ywcode>1</ywcode><ywmsg>u"数据查询成功"</ywmsg></result></body></root>
         """
@@ -382,10 +380,9 @@ hello world
 if __name__ == '__main__':
     try:
         from wsgiref.simple_server import make_server
-
         server = make_server('0.0.0.0', 7789, Application([HelloWorldService], 'tns'))
-        server.serve_forever()
         print 'listening on 127.0.0.1:7789'
         print 'wsdl is at: http://localhost:7789/SOAP/?wsdl'
+        server.serve_forever()
     except ImportError:
         print "Error: example server code requires Python >= 2.5"
