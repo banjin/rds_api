@@ -114,7 +114,7 @@ hello world
 
         return data
 
-    @rpc(String, String, String, _returns=String)
+    @rpc(String, Integer, String, _returns=String)
     def get_tactrcs_config(self, xtlb, jkid, UTF8XmlDoc):
         """
         全局参数查询
@@ -123,6 +123,9 @@ hello world
         :param UTF8XmlDoc:
         :return:
         """
+        xtlb = xtlb
+        jkid = jkid
+        doc_string = UTF8XmlDoc
 
         return """<?xml version="1.0" encoding="UTF-8"?>
         <root><head><code>1</code><msg>null</msg</head><body><result>
