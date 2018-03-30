@@ -11,6 +11,7 @@ import os
 import re
 import sys
 import datetime
+import logging
 
 
 ''''' 
@@ -20,6 +21,19 @@ client.
 参考:https://www.jianshu.com/p/ad3c27d2a946
 http://blog.sina.com.cn/s/blog_978a39e401016fzg.html
 '''
+
+logger = logging.getLogger("soap")
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s: %(message)s')
+
+# 文件日志
+file_handler = logging.FileHandler("ag_test.log")
+file_handler.setFormatter(formatter)  # 可以通过setFormatter指定输出格式
+
+# 为logger添加的日志处理器
+logger.addHandler(file_handler)
+
+# 指定日志的最低输出级别，默认为WARN级别
+logger.setLevel(logging.INFO)
 
 
 def get_file_name(file_full_name):
@@ -38,7 +52,7 @@ Docstrings for service methods appear as documentation in the wsdl
 hello world
 
 >>> from suds.client import Client
->>> hello_client = Client('http://40.125.204.79:7789/content-root/services/SafeOutAccess?wsdl')
+>>> hello_client = Client('http://40.125.204.79:7789/bigweb/services/SafeOutAccess?wsdl')
 >>> result = hello_client.service.get_file_status(
 """<?xml version="1.0" encoding="UTF-8" ?>
 <root>
@@ -100,47 +114,260 @@ hello world
 
         return data
 
-    @rpc(String, _returns=String)
-    def get_tactrcs_config(self, global_config):
+    @rpc(String, String, String, _returns=String)
+    def get_tactrcs_config(self, xtlb, jkid, UTF8XmlDoc):
+        """
+        全局参数查询
+        :param global_config:
+        :return:
+        """
+
         return """<?xml version="1.0" encoding="UTF-8"?>
-        <root><head><code></code><msg>u"数据查询成功"</msg</head><body><result>
+        <root><head><code>1</code><msg>null</msg</head><body><result>
         <ywcode>1</ywcode><ywmsg>u"数据查询成功"</ywmsg>
-        <dataObj><giz>AZDM</giz><csmc>u"安管系统安装代码"</csmc><mrz>110001</mrz></dataObj>
-        <dataObj><giz>CLSJKZDZ</giz><csmc>u"存量数据单个数据块最大数据量"</csmc><mrz>10000</mrz></dataObj>
-        <dataObj><giz>CLSJKLJZDZ</giz><csmc>u"存量数据采集任务最大数据库连接数"</csmc><mrz>20</mrz></dataObj>
-        <dataObj><giz>CLRWQDSJ</giz><csmc>u"存量数据采集任务启动时间"</csmc><mrz>19</mrz></dataObj>
-        <dataObj><giz>CLRWJSSJ</giz><csmc>u"存量数据采集任务结束时间"</csmc><mrz>7</mrz></dataObj>
-        <dataObj><giz>ZLCJZQ</giz><csmc>u"增量数据采集周期"</csmc><mrz>1</mrz></dataObj>
-        <dataObj><giz>RZJXWJZDZ</giz><csmc>u"日志解析文件最大值"</csmc><mrz>10</mrz></dataObj>
-        <dataObj><giz>CLSCML</giz><csmc>u"存量数据文件上传目录"</csmc><mrz>/</mrz></dataObj>
-        <dataObj><giz>ZLSCM</giz><csmc>u"增量数据文件上传目录"</csmc><mrz>/</mrz></dataObj>
-        <dataObj><giz>JGXTLB</giz><csmc>u"交管信息系统类别"</csmc><mrz>u"01#类别1名称,02#类别2名称"</mrz></dataObj>
+        
+        <dataObj><gjz>CLSJKZDZ</gjz><csmc>u"存量数据单个数据块最大数据量"</csmc><mrz>10000</mrz></dataObj>
+        <dataObj><gjz>CLSJKLJZDZ</gjz><csmc>u"存量数据采集任务最大数据库连接数"</csmc><mrz>20</mrz></dataObj>
+        <dataObj><gjz>CLRWQDSJ</gjz><csmc>u"存量数据采集任务启动时间"</csmc><mrz>17</mrz></dataObj>
+        <dataObj><gjz>CLRWJSSJ</gjz><csmc>u"存量数据采集任务结束时间"</csmc><mrz>24</mrz></dataObj>
+        <dataObj><gjz>ZLCJZQ</gjz><csmc>u"增量数据采集周期"</csmc><mrz>20</mrz></dataObj>
+        <dataObj><gjz>RZJXWJZDZ</gjz><csmc>u"日志解析文件最大值"</csmc><mrz>20</mrz></dataObj>
+        <dataObj><gjz>FSCSXY</gjz><csmc>u"传输协议NFS、SMB、FTP"</csmc><mrz>NFS</mrz></dataObj>
+        <dataObj><gjz>FSUSER</gjz><csmc>u"用户名"</csmc><mrz></mrz></dataObj>
+        <dataObj><gjz>FSUSERPASS</gjz><csmc>u"密码"</csmc><mrz></mrz></dataObj>
+        <dataObj><gjz>FSIP</gjz><csmc>u"ip地址"</csmc><mrz></mrz></dataObj>
+        <dataObj><gjz>FSPORT</gjz><csmc>u"端口号"</csmc><mrz></mrz></dataObj>
+        <dataObj><gjz>CLSCML</gjz><csmc>u"文件系统存量文件目录"</csmc><mrz>/share/olddir/</mrz></dataObj>
+        <dataObj><gjz>ZLSCML</gjz><csmc>u"文件系统增量文件目录"</csmc><mrz>/share/newdir</mrz></dataObj>
+        <dataObj><gjz>JGXTLB</gjz><csmc>u"交管信息系统类别"</csmc><mrz>8010#80综合应用平台,8021#80综合查询系统,8050#80互联网服务平台,8060#80集成指挥平台</mrz></dataObj>
         </result></body></root>"""
 
-    @rpc(String, _returns=String)
-    def get_single_config(self, single_config):
+    @rpc(String, String, String, _returns=String)
+    def get_single_config(self, xtlb, jkid, UTF8XmlDoc):
+        """
+        单表参数查询
+        :param single_config:
+        :return:
+        """
         now = datetime.datetime.now()
         create_time = now.strftime("%Y-%m-%d %H:%M:%S")
         update_time = now.strftime("%Y-%m-%d %H:%M:%S")
 
         return """<?xml version="1.0" encoding="UTF-8"?>
-            <root><head><code></code><msg>u"数据查询成功"</msg</head><body><result>
+            <root><head><code>1</code><msg>null</msg</head><body><result>
             <ywcode>1</ywcode><ywmsg>u"数据查询成功"</ywmsg>
-            <dataObj><giz>JGXTLB</giz><csmc>u"系统类别代码"</csmc><mrz>01</mrz></dataObj>
-            <dataObj><giz>BM</giz><csmc>u"表名"</csmc><mrz>usera.table01</mrz></dataObj>
-            <dataObj><giz>BMMS</giz><csmc>u"表名描述"</csmc><mrz>u"简单的测试数据文件"</mrz></dataObj>
-            <dataObj><giz>CLCJBJ</giz><csmc>u"存量数据采集标记"</csmc><mrz>1</mrz></dataObj>
-            <dataObj><giz>SJCZD</giz><csmc>u"时间戳字段"</csmc><mrz>starttime</mrz></dataObj>
-            <dataObj><giz>CLQSRQ</giz><csmc>u"存量数据起始日期"</csmc><mrz>2017-01-01</mrz></dataObj>
-            <dataObj><giz>CLGLTJ</giz><csmc>u"存量数据过滤条件"</csmc><mrz>id&gt1000;id&lt10000</mrz></dataObj>
-            <dataObj><giz>CLWCBJ</giz><csmc>u"存量数据采集完成标记"</csmc><mrz>0</mrz></dataObj>
-            <dataObj><giz>ZLKHDGLLX</giz><csmc>u"增量数据客户端过滤类型"</csmc><mrz>!sqlplus,PL/SQL Developer</mrz></dataObj>
-            <dataObj><giz>ZLINSERT</giz><csmc>u"是否采集'insert'增量数据"</csmc><mrz>1</mrz></dataObj>
-            <dataObj><giz>ZLUPDATE</giz><csmc>u"是否采集'update'增量数据"</csmc><mrz>1</mrz></dataObj>
-            <dataObj><giz>ZLDELETE</giz><csmc>u"是否采集'delete'增量数据"</csmc><mrz>1</mrz></dataObj>
-            <dataObj><giz>CJSJ</giz><csmc>u"策略创建时间"</csmc><mrz>{create_time}</mrz></dataObj>
-            <dataObj><giz>GXSJ</giz><csmc>u"策略更新时间"</csmc><mrz>{update_time}</mrz></dataObj>
+            <dataObj>
+            <bm>asd</bm>
+            <jgxtlb>21</jgxtlb>
+            <bmms>asd</bmms>
+            <clcjbj>1</clcjbj>
+            <sjczd>sad</sjczd>
+            <clqsrq>2017-12-05 00:00:00</clqsrq>
+            <clgltj>asda</clgltj>
+            <clwcbj></clwcbj>
+            <zlkhdgllx>plsqldev</zlkhdgllx>
+            <zlinsert>1</zlinsert>
+            <zlupdate>1</zlupdate>
+            <zldelete>1</zldelete>
+            <cjsj>{create_time}</cjsj>
+            <gxsj>{update_time}</gxsj>
+            </dataObj>
+            
+            <dataObj>
+            <bm>asda</bm>
+            <jgxtlb>21</jgxtlb>
+            <bmms>sdada</bmms>
+            <clcjbj>1</clcjbj>
+            <sjczd>asd</sjczd>
+            <clqsrq>2017-12-05 00:00:00</clqsrq>
+            <clgltj>asd</clgltj>
+            <clwcbj></clwcbj>
+            <zlkhdgllx>jdbc</zlkhdgllx>
+            <zlinsert>1</zlinsert>
+            <zlupdate>0</zlupdate>
+            <zldelete>1</zldelete>
+            <cjsj>{create_time}</cjsj>
+            <gxsj>{update_time}</gxsj>
+            </dataObj>
+            
+            <dataObj>
+            <bm>czc</bm>
+            <jgxtlb>21</jgxtlb>
+            <bmms>zczx</bmms>
+            <clcjbj>1</clcjbj>
+            <sjczd>zxc</sjczd>
+            <clqsrq>2017-12-05 00:00:00</clqsrq>
+            <clgltj>asa</clgltj>
+            <clwcbj></clwcbj>
+            <zlkhdgllx>jdbc</zlkhdgllx>
+            <zlinsert>0</zlinsert>
+            <zlupdate>1</zlupdate>
+            <zldelete>0</zldelete>
+            <cjsj>{create_time}</cjsj>
+            <gxsj>{update_time}</gxsj>
+            </dataObj>
+            
+            <dataObj>
+            <bm>vio_serveil</bm>
+            <jgxtlb>10</jgxtlb>
+            <bmms>u"非现场违法表"</bmms>
+            <clcjbj>0</clcjbj>
+            <sjczd></sjczd>
+            <clqsrq></clqsrq>
+            <clgltj></clgltj>
+            <clwcbj></clwcbj>
+            <zlkhdgllx>plsqldev</zlkhdgllx>
+            <zlinsert>1</zlinsert>
+            <zlupdate>1</zlupdate>
+            <zldelete>0</zldelete>
+            <cjsj>{create_time}</cjsj>
+            <gxsj>{update_time}</gxsj>
+            </dataObj>
+            
+            <dataObj>
+            <bm>111</bm>
+            <jgxtlb>10</jgxtlb>
+            <bmms>u"测试2"</bmms>
+            <clcjbj>1</clcjbj>
+            <sjczd>jxsj</sjczd>
+            <clqsrq>2017-12-05 00:00:00</clqsrq>
+            <clgltj>22222</clgltj>
+            <clwcbj></clwcbj>
+            <zlkhdgllx>plsqldev</zlkhdgllx>
+            <zlinsert>1</zlinsert>
+            <zlupdate>1</zlupdate>
+            <zldelete>1</zldelete>
+            <cjsj>{create_time}</cjsj>
+            <gxsj>{update_time}</gxsj>
+            </dataObj>
+            
+            <dataObj>
+            <bm>8</bm>
+            <jgxtlb>21</jgxtlb>
+            <bmms>8</bmms>
+            <clcjbj>1</clcjbj>
+            <sjczd>8</sjczd>
+            <clqsrq>2017-12-05 00:00:00</clqsrq>
+            <clgltj></clgltj>
+            <clwcbj></clwcbj>
+            <zlkhdgllx>plsqldev</zlkhdgllx>
+            <zlinsert>0</zlinsert>
+            <zlupdate>0</zlupdate>
+            <zldelete>0</zldelete>
+            <cjsj>{create_time}</cjsj>
+            <gxsj>{update_time}</gxsj>
+            </dataObj>
+            
             </result></body></root>""".format(create_time=create_time, update_time=update_time)
+
+
+    @rpc(String, String, String, _returns=String)
+    def post_jump(self, xtlb, jkid, UTF8XmlDoc):
+        """
+        心跳状态上报
+        :param self:
+        :param xtlb:
+        :param jkid:
+        :param UTF8XmlDoc:
+        :return:
+        """
+        pass
+
+    @rpc(String, String, String, _returns=String)
+    def post_run_status(self, xtlb, jkid, UTF8XmlDoc):
+        """
+        采集软件运行状态写入
+        :param self:
+        :param xtlb:
+        :param jkid:
+        :param UTF8XmlDoc:
+        :return:
+        """
+        pass
+
+    @rpc(String, String, String, _returns=String)
+    def post_cl_status(self, xtlb, jkid, UTF8XmlDoc):
+        """
+        存量数据处理状态写入
+        :param self:
+        :param xtlb:
+        :param jkid:
+        :param UTF8XmlDoc:
+        :return:
+        """
+        pass
+
+    @rpc(String, String, String, _returns=String)
+    def post_cl_dd(self, xtlb, jkid, UTF8XmlDoc):
+        """
+        存量数据断点写入
+        :param self:
+        :param xtlb:
+        :param jkid:
+        :param UTF8XmlDoc:
+        :return:
+        """
+        pass
+
+    @rpc(String, String, String, _returns=String)
+    def post_cl_file_info(self, xtlb, jkid, UTF8XmlDoc):
+        """
+        存量数据文件信息写入
+        :param self:
+        :param xtlb:
+        :param jkid:
+        :param UTF8XmlDoc:
+        :return:
+        """
+        pass
+
+    @rpc(String, String, String, _returns=String)
+    def post_zl_dd(self, xtlb, jkid, UTF8XmlDoc):
+        """
+        增量数据断点写入
+        :param self:
+        :param xtlb:
+        :param jkid:
+        :param UTF8XmlDoc:
+        :return:
+        """
+        pass
+
+    @rpc(String, String, String, _returns=String)
+    def post_zl_file_info(self, xtlb, jkid, UTF8XmlDoc):
+        """
+        增量数据文件信息写入
+        :param self:
+        :param xtlb:
+        :param jkid:
+        :param UTF8XmlDoc:
+        :return:
+        """
+        pass
+
+    @rpc(String, String, String, _returns=String)
+    def post_ddl_file_info(self, xtlb, jkid, UTF8XmlDoc):
+        """
+        DDL 数据审计信息写入
+        :param self:
+        :param xtlb:
+        :param jkid:
+        :param UTF8XmlDoc:
+        :return:
+        """
+        pass
+
+    @rpc(String, String, String, _returns=String)
+    def post_total(self, xtlb, jkid, UTF8XmlDoc):
+        """
+        数据采集情况统计信息写入
+        :param self:
+        :param xtlb:
+        :param jkid:
+        :param UTF8XmlDoc:
+        :return:
+        """
+        pass
 
 
 if __name__ == '__main__':
