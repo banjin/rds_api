@@ -118,7 +118,9 @@ hello world
     def get_tactrcs_config(self, xtlb, jkid, UTF8XmlDoc):
         """
         全局参数查询
-        :param global_config:
+        :param xtlb:
+        :param jkid:
+        :param UTF8XmlDoc:
         :return:
         """
 
