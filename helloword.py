@@ -378,11 +378,10 @@ hello world
 
 
 if __name__ == '__main__':
-    try:
-        from wsgiref.simple_server import make_server
-        server = make_server('0.0.0.0', 7789, Application([HelloWorldService], 'tns'))
-        print 'listening on 127.0.0.1:7789'
-        print 'wsdl is at: http://localhost:7789/SOAP/?wsdl'
-        server.serve_forever()
-    except ImportError:
-        print "Error: example server code requires Python >= 2.5"
+
+    from wsgiref.simple_server import make_server
+    server = make_server('0.0.0.0', 7789, Application([HelloWorldService], 'tns'))
+    print 'listening on 127.0.0.1:7789'
+    print 'wsdl is at: http://localhost:7789/SOAP/?wsdl'
+    server.serve_forever()
+
