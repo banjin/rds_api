@@ -276,7 +276,11 @@ hello world
         :param UTF8XmlDoc:
         :return:
         """
-        pass
+        return """
+        <?xml version="1.0" encoding="UTF-8"?>
+            <root><head><code>1</code><msg>null</msg</head><body><result>
+            <ywcode>1</ywcode><ywmsg>u"数据查询成功"</ywmsg></result></body></root>
+        """
 
     @rpc(String, String, String, _returns=String)
     def post_run_status(self, xtlb, jkid, UTF8XmlDoc):
