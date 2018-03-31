@@ -91,11 +91,11 @@ hello world
                     <dataObj><gjz>CLRWJSSJ</gjz><csmc>存量数据采集任务结束时间</csmc><mrz>24</mrz></dataObj>
                     <dataObj><gjz>ZLCJZQ</gjz><csmc>增量数据采集周期</csmc><mrz>20</mrz></dataObj>
                     <dataObj><gjz>RZJXWJZDZ</gjz><csmc>日志解析文件最大值</csmc><mrz>20</mrz></dataObj>
-                    <dataObj><gjz>FSCSXY</gjz><csmc>传输协议NFS、SMB、FTP</csmc><mrz>NFS</mrz></dataObj>
-                    <dataObj><gjz>FSUSER</gjz><csmc>用户名</csmc><mrz></mrz></dataObj>
-                    <dataObj><gjz>FSUSERPASS</gjz><csmc>密码</csmc><mrz></mrz></dataObj>
-                    <dataObj><gjz>FSIP</gjz><csmc>ip地址</csmc><mrz></mrz></dataObj>
-                    <dataObj><gjz>FSPORT</gjz><csmc>端口号</csmc><mrz></mrz></dataObj>
+                    <dataObj><gjz>FSCSXY</gjz><csmc>传输协议NFS、SMB、FTP</csmc><mrz>FTP</mrz></dataObj>
+                    <dataObj><gjz>FSUSER</gjz><csmc>用户名</csmc><mrz>ftpuser5</mrz></dataObj>
+                    <dataObj><gjz>FSUSERPASS</gjz><csmc>密码</csmc><mrz>123qwe</mrz></dataObj>
+                    <dataObj><gjz>FSIP</gjz><csmc>ip地址</csmc><mrz>10.0.40.5</mrz></dataObj>
+                    <dataObj><gjz>FSPORT</gjz><csmc>端口号</csmc><mrz>21</mrz></dataObj>
                     <dataObj><gjz>CLSCML</gjz><csmc>文件系统存量文件目录</csmc><mrz>/share/olddir/</mrz></dataObj>
                     <dataObj><gjz>ZLSCML</gjz><csmc>文件系统增量文件目录</csmc><mrz>/share/newdir</mrz></dataObj>
                     <dataObj><gjz>JGXTLB</gjz><csmc>交管信息系统类别</csmc><mrz>8010#80综合应用平台,8021#80综合查询系统,8050#80互联网服务平台,8060#80集成指挥平台</mrz></dataObj>
