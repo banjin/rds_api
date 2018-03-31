@@ -62,8 +62,8 @@ Docstrings for service methods appear as documentation in the wsdl
 hello world
 
 >>> from suds.client import Client
->>> hello_client = Client('http://40.125.204.79:7789/bigweb/services/SafeOutAccess?wsdl')
->>> result = hello_client.service.get_file_status(
+>>> hello_client = Client('http://40.125.204.79:7792/bigweb/services/SafeOutAccess?wsdl')
+>>> result = hello_client.service.queryRdsOut(xtlb='80', jkxlb='',jkid='81Q03', babh='', wkmac='', UTF8XmlDocname=
 """<?xml version="1.0" encoding="UTF-8" ?>
 <root>
 		<QueryCondition>
@@ -270,9 +270,7 @@ hello world
             
             """
 
-            return """<?xml version="1.0" encoding="UTF-8"?>
-                       <root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>
-                   """
+            return """<?xml version="1.0" encoding="UTF-8"?><root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>"""
         # 采集软件运行状态写入
         elif jkid == '81W02':
             logger.info(u"采集软件运行状态写入")
@@ -295,9 +293,7 @@ hello world
             <zlyxzt>1</zlyxzt>          
             </WriteData></root>
             """
-            return """<?xml version="1.0" encoding="UTF-8"?>
-                                   <root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>
-                               """
+            return """<?xml version="1.0" encoding="UTF-8"?><root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>"""
         # 存量数据处理状态写入
         elif jkid == '81W03':
             logger.info(u"存量数据处理状态写入")
@@ -319,9 +315,7 @@ hello world
             </WriteData></root>
             
             """
-            return """<?xml version="1.0" encoding="UTF-8"?>
-                                   <root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>
-                               """
+            return """<?xml version="1.0" encoding="UTF-8"?><root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>"""
         # 存量数据断点写入
         elif jkid == '81W04':
             logger.info(u"存量数据断点写入")
@@ -337,9 +331,7 @@ hello world
                         </WriteData></root>
             """
 
-            return """<?xml version="1.0" encoding="UTF-8"?>
-                                   <root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>
-                               """
+            return """<?xml version="1.0" encoding="UTF-8"?><root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>"""
         # 存量数据文件信息写入
         elif jkid == '81W05':
             logger.info(u"存量数据文件信息写入")
@@ -366,9 +358,7 @@ hello world
                                                 </WriteData></root>
             """
 
-            return """<?xml version="1.0" encoding="UTF-8"?>
-                                   <root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>
-                                """
+            return """<?xml version="1.0" encoding="UTF-8"?><root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>"""
         # 增量数据断点写入
         elif jkid == '81W06':
             logger.info(u"增量数据断点写入")
@@ -380,9 +370,7 @@ hello world
                                     </WriteData></root>
             """
 
-            return """<?xml version="1.0" encoding="UTF-8"?>
-                                   <root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>
-                               """
+            return """<?xml version="1.0" encoding="UTF-8"?><root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>"""
         # 增量数据文件信息写入
         elif jkid == '81W07':
             logger.info(u"增量数据文件信息写入")
@@ -410,9 +398,7 @@ hello world
                                                 </WriteData></root>
             """
 
-            return """<?xml version="1.0" encoding="UTF-8"?>
-                                   <root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>
-                               """
+            return """<?xml version="1.0" encoding="UTF-8"?><root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>"""
         # DDL数据审计信息写入
         elif jkid == '81W08':
             logger.info(u"DDL数据审计信息写入")
@@ -430,10 +416,7 @@ hello world
                                 <nr>good</nr>
                                 </WriteData></root>
             """
-
-            return """<?xml version="1.0" encoding="UTF-8"?>
-                                   <root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>
-                               """
+            return """<?xml version="1.0" encoding="UTF-8"?><root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>"""
         # 数据采集情况统计信息写入
         elif jkid == '81W09':
             logger.info(u"数据采集情况统计信息写入")
@@ -460,9 +443,7 @@ hello world
                                             </WriteData></root>
             """
 
-            return """<?xml version="1.0" encoding="UTF-8"?>
-                                   <root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>
-                               """
+            return """<?xml version="1.0" encoding="UTF-8"?><root><head><code>1</code><msg>null</msg</head><body><wrongnum>0</wrongnum></body></root>"""
         else:
             return "error"
 
