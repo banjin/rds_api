@@ -113,7 +113,7 @@ hello world
                         <ywcode>1</ywcode><ywmsg>u"数据查询成功"</ywmsg>
                         <dataObj>
                         <bm>usera.table01</bm>
-                        <jgxtlb>21</jgxtlb>
+                        <jgxtlb>10</jgxtlb>
                         <bmms>u"表01"</bmms>
                         <clcjbj>1</clcjbj>
                         <sjczd>starttime</sjczd>
@@ -130,7 +130,7 @@ hello world
 
                         <dataObj>
                         <bm>usera.table02</bm>
-                        <jgxtlb>21</jgxtlb>
+                        <jgxtlb>10</jgxtlb>
                         <bmms>u"表02"</bmms>
                         <clcjbj>1</clcjbj>
                         <sjczd>starttime</sjczd>
@@ -147,7 +147,7 @@ hello world
 
                         <dataObj>
                         <bm>usera.table03</bm>
-                        <jgxtlb>21</jgxtlb>
+                        <jgxtlb>10</jgxtlb>
                         <bmms>u"表03"</bmms>
                         <clcjbj>1</clcjbj>
                         <sjczd>starttime</sjczd>
