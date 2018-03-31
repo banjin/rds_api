@@ -127,41 +127,6 @@ hello world
                         <cjsj>{create_time}</cjsj>
                         <gxsj>{update_time}</gxsj>
                         </dataObj>
-
-                        <dataObj>
-                        <bm>usera.table02</bm>
-                        <jgxtlb>10</jgxtlb>
-                        <bmms>u"表02"</bmms>
-                        <clcjbj>1</clcjbj>
-                        <sjczd>starttime</sjczd>
-                        <clqsrq>2017-12-06 00:00:00</clqsrq>
-                        <clgltj>where id>=0</clgltj>
-                        <clwcbj>0</clwcbj>
-                        <zlkhdgllx>jdbc</zlkhdgllx>
-                        <zlinsert>1</zlinsert>
-                        <zlupdate>0</zlupdate>
-                        <zldelete>1</zldelete>
-                        <cjsj>{create_time}</cjsj>
-                        <gxsj>{update_time}</gxsj>
-                        </dataObj>
-
-                        <dataObj>
-                        <bm>usera.table03</bm>
-                        <jgxtlb>10</jgxtlb>
-                        <bmms>u"表03"</bmms>
-                        <clcjbj>1</clcjbj>
-                        <sjczd>starttime</sjczd>
-                        <clqsrq>2017-12-07 00:00:00</clqsrq>
-                        <clgltj>where id>=0</clgltj>
-                        <clwcbj>0</clwcbj>
-                        <zlkhdgllx>jdbc</zlkhdgllx>
-                        <zlinsert>0</zlinsert>
-                        <zlupdate>1</zlupdate>
-                        <zldelete>0</zldelete>
-                        <cjsj>{create_time}</cjsj>
-                        <gxsj>{update_time}</gxsj>
-                        </dataObj>
-
                         </result></body></root>""".format(create_time=create_time, update_time=update_time)
         # 根据文件名查询存量数据日志解析文件最新的处理状态
         elif jkid == '81Q03':
