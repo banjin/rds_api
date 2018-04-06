@@ -52,7 +52,7 @@ def get_file_name(file_full_name):
 
 class HelloWorldService(DefinitionBase):
     @soap(String, String, String, String, String, String, _returns=String)
-    def queryRdsOut(self, xtlb='', jkxlb='',jkid='', babh='', wkmac='',UTF8XmlDocname=''):
+    def queryRdsOut(self, xtlb='', jkxlh='',jkid='', babh='', wkmac='',UTF8XmlDoc=''):
         '''''
 Docstrings for service methods appear as documentation in the wsdl
 <b>what fun</b>
@@ -93,7 +93,7 @@ hello world
         # 根据文件名查询存量数据日志解析文件最新的处理状态
         elif jkid == '81Q03':
             logger.info(u"获取存量文件状态")
-            file_list = re.findall('<wjm>(.*?)</wjm>', UTF8XmlDocname)
+            file_list = re.findall('<wjm>(.*?)</wjm>', UTF8XmlDoc)
             file_num = len(file_list)
             if not file_num:
                 return """<?xml version="1.0" encoding="UTF-8" ?>
@@ -185,7 +185,7 @@ hello world
             return "error"
 
     @soap(String, String, String, String, String, String, _returns=String)
-    def writeRdsOut(self, xtlb='', jkxlb='', jkid='', babh='', wkmac='', UTF8XmlDocname=''):
+    def writeRdsOut(self, xtlb='', jkxlh='', jkid='', babh='', wkmac='', UTF8XmlDoc=''):
 
         # 心跳状态上报
         if jkid == '81W01':
