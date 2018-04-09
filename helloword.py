@@ -53,7 +53,7 @@ def get_file_name(file_full_name):
 class HelloWorldService(DefinitionBase):
     @soap(String, String, String, String, String, String, _returns=String)
     def queryRdsOut(self, xtlb='', jkxlh='',jkid='', babh='', wkmac='',UTF8XmlDoc=''):
-        '''''
+        '''
 Docstrings for service methods appear as documentation in the wsdl
 <b>what fun</b>
 @param data the data to say hello to
@@ -63,7 +63,7 @@ hello world
 
 >>> from suds.client import Client
 >>> hello_client = Client('http://40.125.204.79:7792/bigweb/services/SafeOutAccess?wsdl')
->>> result = hello_client.service.queryRdsOut(xtlb='80', jkxlb='',jkid='81Q03', babh='', wkmac='', UTF8XmlDocname=
+>>> result = hello_client.service.queryRdsOut(xtlb='80', jkxlb='',jkid='81Q03', babh='', wkmac='', UTF8XmlDoc=
 """<?xml version="1.0" encoding="UTF-8" ?>
 <root>
 		<QueryCondition>
@@ -182,7 +182,7 @@ hello world
 
             return data
         else:
-            return "error"
+            return "params error"
 
     @soap(String, String, String, String, String, String, _returns=String)
     def writeRdsOut(self, xtlb='', jkxlh='', jkid='', babh='', wkmac='', UTF8XmlDoc=''):
