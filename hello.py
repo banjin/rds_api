@@ -351,7 +351,7 @@ hello world
 
             return """<?xml version="1.0" encoding="UTF-8"?><root><head><code>1</code><msg>null</msg></head><body><wrongnum>0</wrongnum></body></root>"""
         else:
-            return "error"
+            return "params error"
 
 
 if __name__ == '__main__':
