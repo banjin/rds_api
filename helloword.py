@@ -17,7 +17,7 @@ import logging
 import soaplib
 
 from soaplib.core.service import soap
-from soaplib.core.service import DefinitionBase
+from soaplib.core.service import rpc, DefinitionBase
 from soaplib.core.model.primitive import String, Integer
 
 from soaplib.core.server import wsgi
@@ -52,14 +52,8 @@ def get_file_name(file_full_name):
 
 class HelloWorldService(DefinitionBase):
     @soap(String, String, String, String, String, String, _returns=String)
-    def queryRdsOut(self, xtlb='', jkxlh='',jkid='', babh='', wkmac='',UTF8XmlDoc=''):
-        '''
-Docstrings for service methods appear as documentation in the wsdl
-<b>what fun</b>
-@param data the data to say hello to
-@param the number of times to say hello
-@return the completed array
-hello world
+    def queryRdsOut(self, xtlb='', jkxlh='',jkid='', babh='', wkmac='', UTF8XmlDoc=''):
+        '''Docstrings for service methods appear as documentation in the wsdl
 
 >>> from suds.client import Client
 >>> hello_client = Client('http://40.125.204.79:7792/bigweb/services/SafeOutAccess?wsdl')
@@ -78,6 +72,9 @@ hello world
 </root>""")
 >>> print result
 '''
+        print UTF8XmlDoc
+        print xtlb
+        print jkid
         # 全局参数查询
         if jkid == "81Q01":
             logger.info(u"获取全局策略")
@@ -100,9 +97,14 @@ hello world
                                         <root><head><code>1</code><msg>u"数据查询成功"</msg></head>
                                                         <body><result><ywcode>0</ywcode><ywmsg>无数据</ywmsg></result></body></root>"""
             file_name_list = map(get_file_name, file_list)
-            pre_file_list = os.listdir('/data/xml/pre')
-            updated_file_list = os.listdir('/data/xml/uploaded')
-            back_file_list = os.listdir('/data/xml/back')
+            # pre_file_list = os.listdir('/data/xml/pre')
+            # updated_file_list = os.listdir('/data/xml/uploaded')
+            # back_file_list = os.listdir('/data/xml/back')
+
+            pre_file_list = os.listdir('/data/test_api/rds_api/ttt/xml/pre')
+            updated_file_list = os.listdir('/data/test_api/rds_api/ttt/xml/updated')
+            back_file_list = os.listdir('/data/test_api/rds_api/ttt/xml/back')
+
 
             # 采集文件
             pre_file_name_ist = map(get_file_name, pre_file_list)
