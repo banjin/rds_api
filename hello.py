@@ -11,6 +11,7 @@ import os
 import re
 import sys
 import logging
+import datetime
 
 
 ''''' 
@@ -63,7 +64,7 @@ hello world
             now = datetime.datetime.now()
             create_time = now.strftime("%Y-%m-%d %H:%M:%S")
             update_time = now.strftime("%Y-%m-%d %H:%M:%S")
-            return """<?xml version="1.0" encoding="UTF-8"?><root><head><code>1</code><msg>null</msg></head><body><result><ywcode>1</ywcode><ywmsg>u"数据查询成功"</ywmsg><dataObj><bm>usera.table01</bm><jgxtlb>10</jgxtlb><bmms>数据库表01</bmms><clcjbj>1</clcjbj><sjczd>starttime</sjczd><clqsrq>2017-12-05 00:00:00</clqsrq><clgltj>where id>=0</clgltj><clwcbj>0</clwcbj><zlkhdgllx>plsqldev</zlkhdgllx><zlinsert>1</zlinsert><zlupdate>1</zlupdate><zldelete>1</zldelete><cjsj>{create_time}</cjsj><gxsj>{update_time}</gxsj></dataObj></result></body></root>""".format(
+            return """<?xml version="1.0" encoding="UTF-8"?><root><head><code>1</code><msg>null</msg></head><body><result><ywcode>1</ywcode><ywmsg>u"数据查询成功"</ywmsg><dataObj><bm>table01</bm><jgxtlb>10</jgxtlb><bmms>数据库表01</bmms><clcjbj>1</clcjbj><sjczd>starttime</sjczd><clqsrq>2017-12-05 00:00:00</clqsrq><clgltj>where id>=0</clgltj><clwcbj>0</clwcbj><zlkhdgllx>plsqldev</zlkhdgllx><zlinsert>1</zlinsert><zlupdate>1</zlupdate><zldelete>1</zldelete><cjsj>{create_time}</cjsj><gxsj>{update_time}</gxsj></dataObj></result></body></root>""".format(
                 create_time=create_time, update_time=update_time)
         # 根据文件名查询存量数据日志解析文件最新的处理状态
         elif jkid == '81Q03':
