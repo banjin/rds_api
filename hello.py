@@ -103,9 +103,7 @@ hello world
                         return_file_list.append({"file_status": 5, "file_name": file_name})
                         logger.info("{file_name} 要求重传".format(file_name=file_name))
 
-            return_code = """<?xml version="1.0" encoding="UTF-8" ?>
-                                                <root><head><code>1</code><msg>u"数据查询成功"</msg></head>
-                                                                <body>{file_content}</body></root>"""
+            return_code = """<?xml version="1.0" encoding="UTF-8" ?><root><head><code>1</code><msg>u"数据查询成功"</msg></head><body>{file_content}</body></root>"""
 
             a = ''
             for file_data in return_file_list:
