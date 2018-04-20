@@ -76,9 +76,9 @@ hello world
                                                 <root><head><code>1</code><msg>u"数据查询成功"</msg></head>
                                                                 <body><result><ywcode>0</ywcode><ywmsg>无数据</ywmsg></result></body></root>"""
             file_name_list = map(get_file_name, file_list)
-            pre_file_list = os.listdir('/data/xml/pre')
-            updated_file_list = os.listdir('/data/xml/uploaded')
-            back_file_list = os.listdir('/data/xml/back')
+            pre_file_list = os.listdir('/hd1t/data/xml/pre')
+            updated_file_list = os.listdir('/hd1t/data/xml/uploaded')
+            back_file_list = os.listdir('/hd1t/data/xml/back')
 
             # pre_file_list = os.listdir('/data/test_api/rds_api/ttt/xml/pre')
             # updated_file_list = os.listdir('/data/test_api/rds_api/ttt/xml/updated')
